@@ -34,18 +34,20 @@ def main():
             code = input('podaj kod waluty którą chcesz sprzedać \n : ')
             code = code.upper()
             if code in codes:
-                value = int(input(f'Ile {code} chcesz sprzedać?'))
+                value = int(input(f'Ile {code} chcesz sprzedać? \n: '))
                 if value <= 0:
                     raise ValueError('musisz mieć więcej niż 0')
                 else:
                     for rates in response[0]['rates']:
                         if rates['code'] == code:
                             saldo = value * rates['mid']
-                            print(f'za {value} : {code} otrzymasz {saldo} PLN')
+                            print('\n', f'za {value} : {code} otrzymasz {saldo} PLN')
+                            return f"wedlug kursu z dnia {response[0]['effectiveDate']} NBP"
+                            
             else:
                 raise ValueError('błędny kod waluty')
 
         if a == 0:
             sys.exit(0)
 if __name__ == '__main__':
-    main()
+    print(main())
